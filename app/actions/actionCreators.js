@@ -56,6 +56,15 @@ const fetchedPostsKeys = (posts) => ({
     data: { posts },
 });
 
+const fetchBets = () => ({
+    type: 'FETCH_BETS',
+});
+
+const fetchedBetsKeys = (bets) => ({
+    type: 'FETCHED_BETS',
+    data: { bets },
+});
+
 const submitBet = () => ({
       type: 'INPUT_FORM_SUBMIT'
 });
@@ -64,6 +73,8 @@ export default {
     increment,
     fetchPosts,
     fetchedPostsKeys,
+    fetchBets,
+    fetchedBetsKeys,
     placeBet,
     enableBetSlip,
     disableBetSlip,

@@ -3,7 +3,7 @@ import actions from '../actions/actionCreators';
 import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {Input, Button, Message} from 'semantic-ui-react';
-import {ref} from '../data/baseConfig'
+import {ref, firebaseAuth} from '../data/baseConfig'
 
 class BetSlipForm extends Component {
 
@@ -14,7 +14,8 @@ class BetSlipForm extends Component {
     }
 
      saveBet (data, selections) {
-      ref.child(`users/vypa5Y5ucDMm91sHEXF8knBEemF3/info/bets`) // TO-DO users firebaseAuth
+       var time = new Date().getTime();
+      ref.child(`users/${firebaseAuth().currentUser.uid}/info/bets/${time}`)
         .set({
           stakes: data,
           selections: selections

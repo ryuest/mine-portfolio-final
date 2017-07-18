@@ -5,6 +5,7 @@ import posts from './posts';
 import selections from './selections';
 import betslip from './betslip';
 import stakes from './stakes';
+import bets from './bets';
 
 const rootReducer = combineReducers({
     routing,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     selections,
     betslip,
     stakes,
+    bets,
     form: formReducer
 });
 

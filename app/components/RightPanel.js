@@ -1,13 +1,19 @@
 import React from 'react';
-import Betslip from './Betslip';
+import Betslip, {BetPlacedAllOpenBets} from './Betslip';
 
 class RightPanel extends React.Component {
     constructor() {
         super();
         this.state = {
          isSelected: false,
-         isReceipt: false
+         isReceipt: false,
+         isShowOpenBets: false
        }
+}
+
+showReceipt () {
+  console.log("show")
+  this.setState({isShowOpenBets: true})
 }
 
 render() {
@@ -26,13 +32,16 @@ render() {
                             </li>
                             <li id="openbets-tab" className="betslip-navigation_menu-item">
                                 <div className="betslip-navigation_menu-link">
-                                    <span className="betslip-navigation_menu-text">Open Bets</span>
+                                    <span className="betslip-navigation_menu-text"
+                                    onClick={() => this.showReceipt()} >Open Bets</span>
                                 </div>
                             </li>
                         </ul>
                     </nav>
                     {this.state.isSelected || this.state.isReceipt > 0 ?
                       <Betslip {...this.props}/> : null }
+                      {this.state.isShowOpenBets > 0 ?
+                        <BetPlacedAllOpenBets {...this.props}/> : null }
                 </div>
             </div>
         </div>

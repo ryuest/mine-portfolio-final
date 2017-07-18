@@ -3,6 +3,8 @@ import {ref, firebaseAuth} from '../data/baseConfig'
 import Login from './Login'
 import Register from './Register'
 import ButtonLink from './ButtonLink';
+import actions from '../actions/actionCreators';
+import store from '../store/configureStore';
 
 class Account extends React.Component {
     constructor() {
@@ -17,28 +19,29 @@ class Account extends React.Component {
         this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
             if (user) {
                 this.setState({authed: true, loading: false})
+                store.dispatch(actions.fetchBets());
             } else {
                 this.setState({authed: false, loading: false})
             }
         })
     }
 
+
+
     render() {
         return (
             <div className="account-container">
-                <ButtonLink />        
-                        {this.state.authed
-                            ? <button style={{
-                                    border: 'none',
-                                    background: 'transparent'
-                                }} onClick={() => {
-                                    logout()
-                                }} className="navbar-brand">Logout</button>
-                            : <div className="account-row">
-                <Login authed={this.state.authed} />
-                <Register authed={this.state.authed} />
-            </div>}
-
+                <ButtonLink/> {this.state.authed
+                    ? <button style={{
+                            border: 'none',
+                            background: 'transparent'
+                        }} onClick={() => {
+                            logout()
+                        }} className="navbar-brand">Logout</button>
+                    : <div className="account-row">
+                        <Login authed={this.state.authed}/>
+                        <Register authed={this.state.authed}/>
+                    </div>}
             </div>
         )
     }
@@ -56,13 +59,8 @@ export function login(email, pw) {
     return firebaseAuth().signInWithEmailAndPassword(email, pw)
 }
 
-export function saveUser (user) {
-  return ref.child(`users/${user.uid}/info`)
-    .set({
-      email: user.email,
-      uid: user.uid
-    })
-    .then(() => user)
+export function saveUser(user) {
+    return ref.child(`users/${user.uid}/info`).set({email: user.email, uid: user.uid}).then(() => user)
 }
 
 export default Account;

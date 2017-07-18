@@ -8,7 +8,7 @@ import {
 } from 'redux-saga/effects';
 
 import {takeLatest, delay, takeEvery} from 'redux-saga';
-import {database} from '../data/baseConfig';
+import {database, firebaseAuth} from '../data/baseConfig';
 import actions from './actionCreators';
 
 export const fetchFirebase = (path) => {
@@ -53,6 +53,14 @@ export function * doFetchPosts() {
     yield put(actions.fetchedPostsKeys(posts));
 }
 
+// fetching posts from Firebase
+export function * doFetchBets() {
+    // make API call without blocking application
+    const bets = yield call(fetchFirebase, `users/${firebaseAuth().currentUser.uid}/info/bets`);
+    // when done, send data to reducer
+    yield put(actions.fetchedBetsKeys(bets));
+}
+
 // Actions for bet placements and betslip statuses
 export function * placeBetGetReceipt() {
   yield put(actions.enableReceipt());
@@ -64,6 +72,7 @@ export function * placeBetGetReceipt() {
 export default function* rootSaga() {
   yield [
     takeLatest('FETCH_POSTS', doFetchPosts),
+    takeLatest('FETCH_BETS', doFetchBets),
     takeLatest('GET_RECEIPT', placeBetGetReceipt),
     log()
   ]

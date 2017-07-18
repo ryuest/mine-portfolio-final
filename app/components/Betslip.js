@@ -7,7 +7,8 @@ class Betslip extends Component {
         super();
         this.state = {
             isReceipt: false
-        }}
+        }
+    }
 
     renderBetSlipWrapper() {
         return (
@@ -20,7 +21,8 @@ class Betslip extends Component {
                     </div>
                 </div>
             </div>
-        )}
+        )
+    }
 
     render() {
         this.state.isReceipt = this.props.betslip.receipt
@@ -30,7 +32,9 @@ class Betslip extends Component {
                     ? <BetSlipReceipt disableReceipt={this.props.disableReceipt} stakes={this.props.stakes}/>
                     : this.renderBetSlipWrapper()}
             </div>
-        )}}
+        )
+    }
+}
 
 class BetSlipReceipt extends Component {
     render() {
@@ -44,16 +48,13 @@ class BetSlipReceipt extends Component {
                 <div className="betslip-receipt_details">
                     <h3 className="betslip-header">Singles</h3>
                     <div className="betslip-receipt-selection">
-                        {Object.keys(this.props.stakes[this.props.stakes.length - 1].betStake.stakes).map(key =>
-                          <BetPlacedSelectionRow
-                          key={key}
-                          disableReceipt={this.props.disableReceipt}
-                          stakes={this.props.stakes[this.props.stakes.length - 1].betStake.stakes[key]}
-                          selections={this.props.stakes[this.props.stakes.length - 1].betStake.selections[key]} />)}
+                        {Object.keys(this.props.stakes[this.props.stakes.length - 1].betStake.stakes).map(key => <BetPlacedSelectionRow key={key} disableReceipt={this.props.disableReceipt} stakes={this.props.stakes[this.props.stakes.length - 1].betStake.stakes[key]} selections={this.props.stakes[this.props.stakes.length - 1].betStake.selections[key]}/>)}
                     </div>
                 </div>
             </div>
-        )}}
+        )
+    }
+}
 
 class BetPlacedSelectionRow extends Component {
 
@@ -65,22 +66,39 @@ class BetPlacedSelectionRow extends Component {
                     </span>
                 </div>
                 <div>
-                    <span id={"receipt-event-name_"+this.props.selections.selection}>{this.props.selections.selection.name}</span>
+                    <span id={"receipt-event-name_" + this.props.selections.selection}>{this.props.selections.selection.name}</span>
                 </div>
                 <button id="closeButton" onClick={() => this.props.disableReceipt()}>X</button>
                 <div className="betslip-receipt-returns">
                     <div className="u-bold">
                         <span className="u-padding-right-tiny">Stake: 🎣
                         </span>
-                        <span className="betslip-currency-symbol">{" "+this.props.stakes}</span>
+                        <span className="betslip-currency-symbol">{" " + this.props.stakes}</span>
                     </div>
                     <div className="betslip-receipt-returns_amount">
                         <span className="betslip-receipt-returns_label">To return: 🎣
                         </span>
-                        <span className="betslip-currency-symbol">{" "+toReturn(this.props.stakes, this.props.selections.selection.price)}</span>
+                        <span className="betslip-currency-symbol">{" " + toReturn(this.props.stakes, this.props.selections.selection.price)}</span>
                     </div>
                 </div>
             </div>
-          )}}
+        )
+    }
+}
+
+export class BetPlacedAllOpenBets extends Component {
+
+    render() {
+        return (
+            <div className="betslip-receipt-selection_row">
+                <div>
+                    <span id="receipt-event-time">SSSS
+                    </span>
+                </div>
+
+            </div>
+        )
+    }
+}
 
 export default Betslip;
