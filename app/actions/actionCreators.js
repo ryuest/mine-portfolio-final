@@ -26,6 +26,14 @@ const disableReceipt = () => ({
     type: 'DISABLE_RECEIPT'
 });
 
+const enableOpenBets = () => ({
+    type: 'ENABLE_OPENBETS'
+});
+
+const disableOpenBets = () => ({
+    type: 'DISABLE_OPENBETS'
+});
+
 const enableBetSlip = () => ({
     type: 'ENABLE_BETSLIP'
 });
@@ -36,6 +44,10 @@ const disableBetSlip = () => ({
 
 const getReceipt = () => ({
     type: 'GET_RECEIPT'
+});
+
+const getShowOpenBets = () => ({
+    type: 'SHOW_OPENBETS'
 });
 
 const increment = (likes) => ({
@@ -76,6 +88,9 @@ export default {
     fetchBets,
     fetchedBetsKeys,
     placeBet,
+    enableOpenBets,
+    disableOpenBets,
+    getShowOpenBets,
     enableBetSlip,
     disableBetSlip,
     getSelection,

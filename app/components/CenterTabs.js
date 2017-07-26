@@ -91,6 +91,7 @@ class Selection extends React.Component {
             this.props.getSelection(selection)
             if (this.props.betslip.receipt) {
                 this.props.disableReceipt()
+            //    this.props.disableOpenBets()
             }
         } else {
             this.setState({isSelected: false, colorGreen: false});

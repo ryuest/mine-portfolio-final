@@ -36,7 +36,7 @@ class BetSlipForm extends Component {
             </form>
         )}}
 
-class BetSlipSelection extends Component {
+export class BetSlipSelection extends Component {
 
     constructor() {
       super()

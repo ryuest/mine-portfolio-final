@@ -14,12 +14,21 @@ export default function(state = [], action) {
             return {
                 ...state,
                 receipt: true
-              }
-
+            }
         case 'DISABLE_RECEIPT':
             return {
                 ...state,
                 receipt: false
+            }
+        case 'ENABLE_OPENBETS':
+            return {
+                ...state,
+                openbets: true
+            }
+        case 'DISABLE_OPENBETS':
+            return {
+                ...state,
+                openbets: false
             }
         default:
             return state;

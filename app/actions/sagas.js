@@ -68,12 +68,19 @@ export function * placeBetGetReceipt() {
   yield put(actions.clearBets());
 }
 
+export function * showOpenBets() {
+  yield put(actions.disableBetSlip());
+  yield put(actions.clearBets());
+  yield put(actions.enableOpenBets());
+}
+
 // single entry point to start all Sagas at once
 export default function* rootSaga() {
   yield [
     takeLatest('FETCH_POSTS', doFetchPosts),
     takeLatest('FETCH_BETS', doFetchBets),
     takeLatest('GET_RECEIPT', placeBetGetReceipt),
+    takeLatest('SHOW_OPENBETS', showOpenBets),
     log()
   ]
 }
