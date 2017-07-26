@@ -1,5 +1,8 @@
 import React from 'react';
 import Betslip, {BetPlacedAllOpenBets} from './Betslip';
+import {ref, firebaseAuth} from '../data/baseConfig';
+import store from '../store/configureStore';
+import actions from '../actions/actionCreators';
 
 class RightPanel extends React.Component {
     constructor() {
@@ -9,6 +12,17 @@ class RightPanel extends React.Component {
             isReceipt: false,
             isShowOpenBets: false
         }
+    }
+
+    componentDidMount() {
+      this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
+          if (user) {
+              this.setState({authed: true, loading: false})
+              store.dispatch(actions.fetchBets());
+          } else {
+              this.setState({authed: false, loading: false})
+          }
+      })
     }
 
     showOpenBets() {

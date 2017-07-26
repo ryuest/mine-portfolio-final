@@ -7,7 +7,7 @@ import { Route } from 'react-router-dom';
 import Game from './Game';
 
 const Sportsbook = ({ log, posts, pages, getSelection, selections, removeSelection, betslip, disableReceipt,
-clearBets, getReceipt, placeBet, stakes, bets, getShowOpenBets, disableOpenBets }) => {
+clearBets, getReceipt, placeBet, stakes, bets, getShowOpenBets, getHideOpenBets, disableOpenBets }) => {
         return (
             <div className="off-canvas_inner-wrapper">
                 <aside className="off-canvas_left">
@@ -27,7 +27,7 @@ clearBets, getReceipt, placeBet, stakes, bets, getShowOpenBets, disableOpenBets 
                 </aside>
                 <div className="off-canvas_main">
                   <Route exact path='/games' render={(props) => (
-                    <Game {...props} posts={posts} log={log} />)}/>
+                    <Game posts={posts} log={log} />)}/>
                     <Route exact path='/login' component={Account}/>
                     <CenterTabs
                       getSelection={getSelection}
@@ -35,7 +35,7 @@ clearBets, getReceipt, placeBet, stakes, bets, getShowOpenBets, disableOpenBets 
                       removeSelection={removeSelection}
                       betslip={betslip}
                       disableReceipt={disableReceipt}
-                      disableOpenBets={disableOpenBets}/>
+                      getHideOpenBets={getHideOpenBets}/>
 
                 </div>
                 <div className="off-canvas_right">

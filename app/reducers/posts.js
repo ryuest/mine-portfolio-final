@@ -6,7 +6,7 @@ export default function(state = {'posts': ['posts' : {'likes': 0}]}, action) {
                 ...action.data
             };
         case 'INCREMENT_LIKES':
-            const i = action.index;
+          //  const i = action.index;
             const list = [
               ...state.posts.slice(0, 0),
               {...state.posts[0], likes: state.posts[0].likes + 1},

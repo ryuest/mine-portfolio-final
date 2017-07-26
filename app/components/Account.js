@@ -15,15 +15,14 @@ class Account extends React.Component {
         }
     }
 
-    componentDidMount() {
-        this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
-            if (user) {
-                this.setState({authed: true, loading: false})
-                store.dispatch(actions.fetchBets());
-            } else {
-                this.setState({authed: false, loading: false})
-            }
-        })
+    componentWillMount() {
+      this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
+          if (user) {
+              this.setState({authed: true, loading: false})            
+          } else {
+              this.setState({authed: false, loading: false})
+          }
+      })
     }
 
     render() {

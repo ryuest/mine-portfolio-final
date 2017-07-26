@@ -7,7 +7,7 @@ import {
     race
 } from 'redux-saga/effects';
 
-import {takeLatest, delay, takeEvery} from 'redux-saga';
+import {takeLatest, delay, takeEvery} from 'redux-saga/effects';
 import {database, firebaseAuth} from '../data/baseConfig';
 import actions from './actionCreators';
 
@@ -23,26 +23,9 @@ export const fetchBetStakes = (path) => {
   return betStakes
 };
 
-// Our worker Saga: will perform the async increment task
-function* incrementAsync() {
-  yield call(delay, 1000)
-  yield put({ type: 'INCREMENT' })
-}
-
-function* watchIncrementAsync() {
-  incrementAsync()
-  yield* takeEvery('INCREMENT_ASYNC', incrementAsync)
-}
-
-function* incrementSaga() {
-  yield call(delay, 1000)
-  yield put(actions.increment(0));
-}
-
 // Increment likes
 function* log() {
-  incrementSaga()
-  yield* takeEvery('LOG', incrementSaga)
+  yield put(actions.increment(0));
 }
 
 // fetching posts from Firebase
@@ -68,10 +51,16 @@ export function * placeBetGetReceipt() {
   yield put(actions.clearBets());
 }
 
+// Show current account Open Bets
 export function * showOpenBets() {
   yield put(actions.disableBetSlip());
   yield put(actions.clearBets());
   yield put(actions.enableOpenBets());
+}
+
+// Disable Open Bets if BetSlip activate
+export function * disableOpenBetsByBetSlip() {
+  yield put(actions.disableOpenBets());
 }
 
 // single entry point to start all Sagas at once
@@ -81,6 +70,7 @@ export default function* rootSaga() {
     takeLatest('FETCH_BETS', doFetchBets),
     takeLatest('GET_RECEIPT', placeBetGetReceipt),
     takeLatest('SHOW_OPENBETS', showOpenBets),
-    log()
+    takeLatest('HIDE_OPENBETS', disableOpenBetsByBetSlip),
+    takeLatest('LOG', log)
   ]
 }
