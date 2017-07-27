@@ -15,14 +15,17 @@ class Account extends React.Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
       this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
           if (user) {
-              this.setState({authed: true, loading: false})            
-          } else {
-              this.setState({authed: false, loading: false})
+              this.setState({authed: true, loading: false})
           }
       })
+    }
+
+    authed() {
+      this.setState({authed: false})
+      logout();
     }
 
     render() {
@@ -33,7 +36,7 @@ class Account extends React.Component {
                             border: 'none',
                             background: 'transparent'
                         }} onClick={() => {
-                            logout()
+                            this.authed()
                         }} className="navbar-brand">Logout</button>
                     : <div className="account-row">
                         <Login authed={this.state.authed}/>

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import BetSlipForm from './BetSlipForm';
+import BetSlipForm, { BetSlipSelection } from './BetSlipForm';
 import { showBetTime, toReturn, timeConverter } from '../helpers';
-import { BetSlipSelection } from './BetSlipForm';
 
 class Betslip extends Component {
     constructor() {

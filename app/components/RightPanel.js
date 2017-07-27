@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import Betslip, {OpenBets} from './Betslip';
 import {ref, firebaseAuth} from '../data/baseConfig';
 import store from '../store/configureStore';
@@ -15,14 +16,14 @@ class RightPanel extends React.Component {
     }
 
     componentDidMount() {
-      this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
-          if (user) {
-              this.setState({authed: true, loading: false})
-              store.dispatch(actions.fetchBets());
-          } else {
-              this.setState({authed: false, loading: false})
-          }
-      })
+        this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
+            if (user) {
+                this.setState({authed: true, loading: false})
+                store.dispatch(actions.fetchBets());
+            } else {
+                this.setState({authed: false, loading: false})
+            }
+        })
     }
 
     showOpenBets() {
@@ -55,15 +56,32 @@ class RightPanel extends React.Component {
                         </nav>
                         {this.state.isSelected || this.state.isReceipt > 0
                             ? <Betslip {...this.props}/>
-                            : null}
-                        {this.state.isShowOpenBets > 0
+                            : <BetSlipErrorMessage message={"Your bet slip is currently empty"}/>}
+                        {this.state.isShowOpenBets && this.state.authed > 0
                             ? <OpenBets {...this.props}/>
                             : null}
+                        {this.state.authed > 0
+                            ? null
+                            : <BetSlipErrorMessage message={"Please Login"}/>}
                     </div>
                 </div>
             </div>
         )
     }
+}
+
+const BetSlipErrorMessage = ({message}) => {
+    return (
+        <div >
+          <Link className="navbar-brand-betslip" to="/login">{message}</Link>
+        </div>
+    )
+}
+
+const Message = ({props}) => {
+    return (
+        <div></div>
+    )
 }
 
 export default RightPanel;
