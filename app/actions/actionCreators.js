@@ -46,11 +46,11 @@ const getReceipt = () => ({
     type: 'GET_RECEIPT'
 });
 
-const getHideOpenBets = () => ({
+const hideOpenBets = () => ({
     type: 'HIDE_OPENBETS'
 });
 
-const getShowOpenBets = () => ({
+const showOpenBets = () => ({
     type: 'SHOW_OPENBETS'
 });
 
@@ -94,8 +94,8 @@ export default {
     placeBet,
     enableOpenBets,
     disableOpenBets,
-    getShowOpenBets,
-    getHideOpenBets,
+    showOpenBets,
+    hideOpenBets,
     enableBetSlip,
     disableBetSlip,
     getSelection,

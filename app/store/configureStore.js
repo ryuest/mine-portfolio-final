@@ -19,8 +19,7 @@ const store = createStore(
 // run saga
 sagaMiddleware.run(rootSaga);
 
-// fetch some data from firebase (posts, bets)
+// fetch some data from firebase (posts)
 store.dispatch(actions.fetchPosts());
-//store.dispatch(actions.fetchBets());
 
 export default store;

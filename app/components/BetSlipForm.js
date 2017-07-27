@@ -55,12 +55,13 @@ export class BetSlipSelection extends Component {
             </div>
         )}
     render() {
+      const {selection} = this.props.selection;
         return (
-            <div id={"single-bet_" + this.props.selection.selection.id} className="betslip-selection">
-                <header>{this.props.selection.selection.eventName}</header>
+            <div id={"single-bet_" + selection.id} className="betslip-selection">
+                <header>{selection.eventName}</header>
                 <div className="betslip-selection_content">
                     <span className="betslip-selection_event">
-                        <em className="u-highlight">{this.props.selection.selection.name}</em>
+                        <em className="u-highlight">{selection.name}</em>
                     </span>
                 </div>
                 <div className="betslip-selection_stake">
@@ -69,7 +70,7 @@ export class BetSlipSelection extends Component {
                                type="text"
                                component={this.renderInput}
                                selection={this.props.selection}
-                               onChange={e => this.onUpdateWinTotal(e, this.props.selection.selection.price)}/>
+                               onChange={e => this.onUpdateWinTotal(e, selection.price)}/>
                     </span>
                 </div>
                 <div className="betslip-footer__totals">

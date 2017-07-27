@@ -30,8 +30,6 @@ const events = {
                 }
             ]
         },
-
-
     event2:
         {
             name: 'Real Madrid U23 vs Barcelona FC U23',
@@ -63,8 +61,6 @@ const events = {
                 }
             ]
         },
-
-
     event3:
         {
             name: 'Manchester U23 vs Liverpool City U23',

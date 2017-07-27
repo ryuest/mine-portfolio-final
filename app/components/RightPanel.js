@@ -1,5 +1,5 @@
 import React from 'react';
-import Betslip, {BetPlacedAllOpenBets} from './Betslip';
+import Betslip, {OpenBets} from './Betslip';
 import {ref, firebaseAuth} from '../data/baseConfig';
 import store from '../store/configureStore';
 import actions from '../actions/actionCreators';
@@ -27,7 +27,7 @@ class RightPanel extends React.Component {
 
     showOpenBets() {
         if (!this.state.isShowOpenBets) {
-            this.props.getShowOpenBets()
+            this.props.showOpenBets()
         }
     }
 
@@ -57,7 +57,7 @@ class RightPanel extends React.Component {
                             ? <Betslip {...this.props}/>
                             : null}
                         {this.state.isShowOpenBets > 0
-                            ? <BetPlacedAllOpenBets {...this.props}/>
+                            ? <OpenBets {...this.props}/>
                             : null}
                     </div>
                 </div>

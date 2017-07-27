@@ -7,7 +7,7 @@ import { Route } from 'react-router-dom';
 import Game from './Game';
 
 const Sportsbook = ({ log, posts, pages, getSelection, selections, removeSelection, betslip, disableReceipt,
-clearBets, getReceipt, placeBet, stakes, bets, getShowOpenBets, getHideOpenBets, disableOpenBets }) => {
+clearBets, getReceipt, placeBet, stakes, bets, showOpenBets, hideOpenBets, disableOpenBets }) => {
         return (
             <div className="off-canvas_inner-wrapper">
                 <aside className="off-canvas_left">
@@ -35,7 +35,7 @@ clearBets, getReceipt, placeBet, stakes, bets, getShowOpenBets, getHideOpenBets,
                       removeSelection={removeSelection}
                       betslip={betslip}
                       disableReceipt={disableReceipt}
-                      getHideOpenBets={getHideOpenBets}/>
+                      hideOpenBets={hideOpenBets}/>
 
                 </div>
                 <div className="off-canvas_right">
@@ -48,7 +48,7 @@ clearBets, getReceipt, placeBet, stakes, bets, getShowOpenBets, getHideOpenBets,
                       placeBet={placeBet}
                       bets={bets}
                       stakes={stakes}
-                      getShowOpenBets={getShowOpenBets}
+                      showOpenBets={showOpenBets}
                       disableOpenBets={disableOpenBets}/>
                 </div>
             </div>
