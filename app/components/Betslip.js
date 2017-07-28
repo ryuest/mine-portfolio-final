@@ -105,18 +105,20 @@ export class OpenBets extends Component {
         }
     }
 
-    populateGraph() {
+    getUserBets() {
+      if( this.props.bets !== null) {
         Object.keys(this.props.bets).map((key) => {
             this.state.labels.push(timeConverter(parseInt(key)))
             this.state.openbets.push(this.props.bets[key])
         })
+      }
     }
 
     render() {
         return (
             <div className="betslip-receipt-selection_row">
                 <div>
-                    <span id="receipt-event-time">{this.populateGraph()}
+                    <span id="receipt-event-time">{this.getUserBets()}
                     </span>
                 </div>
                 {Object.keys(this.state.openbets).map((key, i) => (

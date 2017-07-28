@@ -81,6 +81,11 @@ const fetchedBetsKeys = (bets) => ({
     data: { bets },
 });
 
+const clearOpenBets = () => ({
+    type: 'CLEAR_ALL_BETS',
+});
+
+
 const submitBet = () => ({
       type: 'INPUT_FORM_SUBMIT'
 });
@@ -95,6 +100,7 @@ export default {
     enableOpenBets,
     disableOpenBets,
     showOpenBets,
+    clearOpenBets,
     hideOpenBets,
     enableBetSlip,
     disableBetSlip,

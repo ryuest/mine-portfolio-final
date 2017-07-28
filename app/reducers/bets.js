@@ -5,6 +5,11 @@ export default function(state = [], action) {
                 ...state,
                 ...action.data
             };
+        case 'CLEAR_ALL_BETS':
+            return {
+              ...state,
+              bets: []
+            };
         default:
             return state;
     }

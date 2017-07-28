@@ -52,6 +52,7 @@ export function auth(email, pw) {
 }
 
 export function logout() {
+    store.dispatch(actions.clearOpenBets());
     return firebaseAuth().signOut()
 }
 

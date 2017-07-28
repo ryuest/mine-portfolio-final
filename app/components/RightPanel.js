@@ -57,7 +57,7 @@ class RightPanel extends React.Component {
                         {this.state.isSelected || this.state.isReceipt > 0
                             ? <Betslip {...this.props}/>
                             : <BetSlipErrorMessage message={"Your bet slip is currently empty"}/>}
-                        {this.state.isShowOpenBets && this.state.authed > 0
+                        {this.state.isShowOpenBets && this.state.authed  > 0
                             ? <OpenBets {...this.props}/>
                             : null}
                         {this.state.authed > 0

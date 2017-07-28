@@ -1,5 +1,5 @@
 import actions from '../actions/actionCreators';
-
+import store from '../store/configureStore';
 import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {Input, Button, Message} from 'semantic-ui-react';
@@ -11,6 +11,7 @@ class BetSlipForm extends Component {
         this.props.placeBet(data, selections)
         this.props.getReceipt()
         this.saveBet(data, selections)
+        store.dispatch(actions.fetchBets());
     }
 
      saveBet (data, selections) {
