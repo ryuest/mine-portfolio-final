@@ -7,12 +7,32 @@ import {ref, firebaseAuth} from '../data/baseConfig'
 
 class BetSlipForm extends Component {
 
+  constructor() {
+      super();
+      this.state = {
+          isSelected: false,
+          isReceipt: false,
+          isShowOpenBets: false
+      }
+  }
+
+  componentDidMount() {
+      this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
+          if (user) {
+              this.setState({authed: true, loading: false})
+          } else {
+              this.setState({authed: false, loading: false})
+          }
+      })
+  }
+
     placeBetGetReceipt(data, selections) {
         this.props.placeBet(data, selections)
         this.props.getReceipt()
         this.saveBet(data, selections)
         store.dispatch(actions.fetchBets());
-    }
+      }
+
 
      saveBet (data, selections) {
        var time = new Date().getTime();
@@ -29,11 +49,14 @@ class BetSlipForm extends Component {
         return (
             <form >
                 {Object.keys(selections).map((key, i) => (<BetSlipSelection key={key} i={i} selection={selections[key]}/>))}
-                <div className="betslip-bet-actions">
-                    <button onClick={handleSubmit((data) => {
-                        this.placeBetGetReceipt(data, selections)
-                    })}>Place Bet</button>
-                </div>
+                {this.state.authed > 0
+                    ? <div className="betslip-bet-actions">
+                        <button onClick={handleSubmit((data) => {
+                            this.placeBetGetReceipt(data, selections)
+                        })}>Place Bet</button>
+                    </div>
+                    : null}
+
             </form>
         )}}
 
